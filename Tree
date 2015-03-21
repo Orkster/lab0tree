@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+struct Node{
+	int data;
+	Node *parent = NULL, *left = NULL, *right = NULL;
+};
+
+typedef Node* PNode;
+
+struct Tree{
+	PNode root = NULL;
+};
