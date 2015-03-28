@@ -138,6 +138,9 @@ void Tree::MoveNode(PNode destination, PNode source) {
 }
 
 void Tree::Delete(PNode node) {
+	if (node == NULL)
+		return;
+
 	if (node->right == NULL)
 		MoveNode(node, node->left);
 	else if (node->left == NULL)
@@ -168,6 +171,5 @@ void Tree::Destroy(PNode node) {
 }
 
 void Tree::Delete(int key) {
-	PNode deleted_item = Search(key);
-	Delete(deleted_item);
+	Delete(Search(key));
 }
