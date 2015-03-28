@@ -27,8 +27,9 @@ public:
 	PNode Predecessor(PNode);
 
 	void MoveNode(PNode, PNode);
-	void DeleteNode(PNode);
 	void Destroy(PNode);
+	void Delete(PNode);
+	void Delete(int);
 
 private:
 	PNode root;
