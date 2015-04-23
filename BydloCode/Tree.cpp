@@ -32,15 +32,20 @@ PNode Tree::Insert(int value) {
     if (!root) {
         root = insert_node;
         return insert_node;
+        ++size;
     }
 
     while (current) {
         curr_parent = current;
 
-        if (value < current->data)
+        if (value < current->data){
             current = current->left;
-        else
+            ++size;
+        }
+        else{
             current = current->right;
+            ++size;
+        }
     }
 
     insert_node->parent = curr_parent;
@@ -209,6 +214,65 @@ bool Tree::isBalanced(PNode node){
                 return true;
             else
                 return false;
+}
+
+void Tree::treeToVine(PNode pseudoroot, int& size){
+
+    PNode vineTail, remainder, tempPtr;
+    vineTail = pseudoroot;
+    remainder = vineTail->right;
+    size = 0;
+    while(remainder != NULL){
+        if (remainder->left == NULL){
+            vineTail = remainder;
+            remainder = remainder->right;
+            size++;
+        }
+        else{
+            tempPtr = remainder->left;
+            remainder->left = tempPtr->right;
+            tempPtr->right = remainder;
+            remainder = tempPtr;
+            vineTail->right = tempPtr;
+        }
+    }
+    }
+
+void Tree::vineToTree(PNode root, int size){
+
+    int full_count = fullSize(size);
+    compresion(root, size - full_count);
+    for(size = full_count; size > 1; size /= 2)
+        compresion(root, size/2);
+}
+
+int Tree::fullSize(int size)
+{
+int Rtn = 1;
+while ( Rtn <= size ) // Drive one step PAST FULL
+Rtn = Rtn + Rtn + 1; // next pow(2,k)-1
+return Rtn/2;
+}
+
+void Tree::compresion(PNode root, int count)
+{
+PNode current = root;
+for ( int j = 0; j < count; j++ )
+{
+//Leftward rotation
+PNode child = current->right;
+current->right = child->right;
+current = current->right;
+child->right = current->left;
+current->left = child;
+}
+}
+
+void Tree::DSW(PNode root){
+    pseudoroot->right = root;
+    treeToVine(pseudoroot, size);
+    vineToTree(pseudoroot, size);
+    pseudoroot = NULL;
 }
 
 void Tree::Destroy(PNode node) {

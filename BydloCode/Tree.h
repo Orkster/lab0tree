@@ -34,12 +34,18 @@ public:
     void Destroy(PNode);
     void Delete(PNode);
     void Delete(int);
+    void treeToVine(PNode, int&);
+    void vineToTree(PNode, int);
+    int fullSize(int);
+    void compresion(PNode, int);
+    void DSW(PNode);
     bool isBalanced(PNode);
     int treeSize(PNode);
     int maxDepth(PNode);
     int minDepth(PNode);
 
-    PNode root;
+    PNode root, pseudoroot;
+    int size = 0;
 };
 
 #endif // TREE_H
