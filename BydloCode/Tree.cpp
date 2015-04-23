@@ -90,6 +90,30 @@ PNode Tree::Minimum(PNode root) {
     return current;
 }
 
+int Tree::maxDepth(PNode node)
+    {
+        if(node == NULL || (node->left == NULL && node->right == NULL))
+                return 0;
+
+        int leftDepth = maxDepth(node->left);
+        int rightDepth = maxDepth(node->right);
+
+        return leftDepth > rightDepth ?
+                    leftDepth + 1 : rightDepth + 1;
+    }
+
+int Tree::minDepth(PNode node)
+    {
+        if(node == NULL || (node->left == NULL && node->right == NULL))
+                return 0;
+
+        int leftDepth = minDepth(node->left);
+        int rightDepth = minDepth(node->right);
+
+        return leftDepth < rightDepth ?
+                    leftDepth + 1 : rightDepth + 1;
+    }
+
 PNode Tree::Successor(PNode node) {
     PNode successor_parent = NULL, current = node;
 
@@ -177,6 +201,14 @@ int Tree::treeSize(PNode node){
     if(node == NULL) return 0;
             else
                 return treeSize(node->left) + 1 + treeSize(node->right);
+}
+
+bool Tree::isBalanced(PNode node){
+
+    if(maxDepth(node)-minDepth(node) <= 1)
+                return true;
+            else
+                return false;
 }
 
 void Tree::Destroy(PNode node) {

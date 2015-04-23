@@ -27,13 +27,17 @@ public:
     PNode Minimum(PNode);
     PNode Successor(PNode);
     PNode Predecessor(PNode);
-    int treeSize(PNode);
+
 
     void MoveNode(PNode, PNode);
     void Display(PNode);
     void Destroy(PNode);
     void Delete(PNode);
     void Delete(int);
+    bool isBalanced(PNode);
+    int treeSize(PNode);
+    int maxDepth(PNode);
+    int minDepth(PNode);
 
     PNode root;
 };
